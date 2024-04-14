@@ -1,0 +1,130 @@
+WindowManager:
+    MainWindowMovie:
+        name: "search"
+    SearchResultsMovie:
+        name: "choose"
+    ShowResults:
+        name: "show"
+
+
+<MainWindowMovie>:
+    searchbar: searchbar
+    name: "search"
+    MDScreen:
+        size: root.width, root.height
+        MDLabel:
+            id: label
+            text: "Search for the show you want"
+            halign: "center"
+            pos_hint: {"center_y": .7}
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: "20dp"
+            adaptive_height: True
+            size_hint_x: .8
+            pos_hint: {"center_x": .5, "center_y": .5}
+
+            MDTextField:
+                id: searchbar
+                hint_text: "Search for the show you want"
+                helper_text_color_focus: "brown"
+                multiline: False
+                size_hint_x: 0.9
+                on_text_validate:
+                    root.searchbarResults()
+                    app.root.current = "choose"
+
+            MDLabel:
+                id: improvlabel
+                theme_text_color: "Custom"
+                text_color: 0, 0, 0, 0
+                text: root.searchbar2
+
+
+        MDIconButton:
+            icon: "text-search"
+            style: "filled"
+            theme_bg_color: "Custom"
+            md_bg_color: "brown"
+            theme_icon_color: "Custom"
+            icon_color: "white"
+            pos_hint: {"center_x": .9, "center_y": .5}
+            on_release:
+                root.searchbarResults()
+                app.root.current = "choose"
+
+
+
+<SearchResultsMovie>:
+    name: "choose"
+    MDLabel:
+        id: label
+        text: "test"
+        halign: "center"
+        pos_hint: {"center_y": .7}
+
+    MDLabel:
+        id: label2
+        text: "Choose your desired thing to watch: "
+        halign: "center"
+        pos_hint: {"center_y": 0.6}
+
+    ScrollView:
+        size_hint_4: 0.5
+        pos_hint: {"center_y": 0.1}
+        MDList:
+            id: container
+            on_touch_up: app.root.current = "show"
+
+
+    MDFlatButton:
+        id: back
+        text: "Go back"
+        pos_hint: {"x": 0.45, "y": 0.8}
+        theme_bg_color: "Custom"
+        md_bg_color: "brown"
+        theme_icon_color: "Custom"
+        icon_color: "white"
+        on_release:
+            app.root.current = "search"
+
+    MDLabel:
+        id: improvlabel
+        text_color: 0, 0, 0, 0
+        theme_text_color: "Custom"
+        text: root.labeltext
+
+
+<ShowResults>:
+    name: "show"
+    MDLabel:
+        id: label
+        text: "test"
+        halign: "center"
+        pos_hint: {"center_y": .7}
+
+    MDLabel:
+        id: label2
+        text: "Choose your desired thing to watch: "
+        halign: "center"
+        pos_hint: {"center_y": 0.6}
+
+    ScrollView:
+        size_hint_4: 0.5
+        pos_hint: {"center_y": 0.1}
+        MDList:
+            id: container
+
+
+    MDFlatButton:
+        id: back
+        text: "Go back"
+        pos_hint: {"x": 0.45, "y": 0.8}
+        theme_bg_color: "Custom"
+        md_bg_color: "brown"
+        theme_icon_color: "Custom"
+        icon_color: "white"
+        on_release:
+            app.root.current = "choose"
+
